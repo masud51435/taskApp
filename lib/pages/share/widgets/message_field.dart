@@ -22,7 +22,7 @@ class MessageTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         maxLines: 5,
-
+        onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
         decoration: InputDecoration(
           hintText: 'Write your message',
           fillColor: Colors.white,
