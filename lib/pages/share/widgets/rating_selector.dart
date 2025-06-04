@@ -27,6 +27,7 @@ class RatingSelector extends StatelessWidget {
               controller.rating.value = rating;
             },
           ),
+          
         ],
       ),
     );

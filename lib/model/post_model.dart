@@ -9,6 +9,7 @@ class PostModel {
   final String travelDate;
   final double rating;
   final List<String> images;
+  final String? timestamp;
 
   PostModel({
     required this.departureAirport,
@@ -19,6 +20,7 @@ class PostModel {
     required this.travelDate,
     required this.rating,
     required this.images,
+    this.timestamp,
   });
 
   /// Convert PostModel to Map for Firestore
@@ -45,6 +47,7 @@ class PostModel {
       travelClass: json['class'],
       message: json['message'],
       travelDate: json['travelDate'],
+      timestamp: json['timestamp'],
       rating: (json['rating'] as num).toDouble(),
       images: List<String>.from(json['images'] ?? []),
     );

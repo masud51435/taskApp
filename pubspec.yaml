@@ -47,9 +47,7 @@ dependencies:
   firebase_storage: ^12.4.6
   dotted_border: ^3.0.1
   flutter_rating_bar: ^4.0.1
-  month_year_picker: ^0.5.0+1
-  flutter_date_range_picker: ^0.2.0
-  calendar_date_picker2: ^2.0.1
+
 
 dev_dependencies:
   flutter_test:

@@ -33,7 +33,7 @@ class ClassDropdownField extends StatelessWidget {
             }).toList(),
             onChanged: (value) {
               if (value != null) {
-                classController.clear();
+                controller.selectClass(value);
                 classController.text = value;
               }
             },
