@@ -2,9 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/app_colors.dart';
 import '../../pages/login/login.dart';
-import '../../pages/ultils/Uitilities.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();
@@ -35,30 +33,27 @@ class SignUpController extends GetxController {
             password: passwordController.text.trim(),
           )
           .then((value) {
-            Utils().toastMessage(
-              message: 'SignUp Successfully',
-              color: greenColor,
-            );
+            Get.snackbar('SignUp', 'SignUp Successfully');
             setLoading(false);
             Get.offAllNamed('/homePage');
           })
           .onError((error, stackTrace) {
             setLoading(false);
-            Utils().toastMessage(message: error.toString());
+            Get.snackbar('Error', error.toString());
           });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        Utils().toastMessage(message: 'password should be atleast 6 character');
+        Get.snackbar('Error', 'The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        Utils().toastMessage(
-          message: 'The account already exists for that email,please login now',
-        );
+        Get.snackbar('Error', 'The account already exists for that email.');
+
         setLoading(false);
         Get.off(() => const Login());
       }
     } catch (e) {
       print(e);
-      Utils().toastMessage(message: e.toString());
+      Get.snackbar('Error', e.toString());
+
       setLoading(false);
     }
   }

@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:taskapp/core/app_colors.dart';
-
-import '../../pages/ultils/Uitilities.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
@@ -33,26 +30,25 @@ class LoginController extends GetxController {
             password: passwordControllers.text.trim(),
           )
           .then((value) {
-            Utils().toastMessage(
-              message: 'Login Successfully',
-              color: greenColor,
-            );
+            Get.snackbar('Login', 'Login Successfully');
             setLoading(false);
             Get.offAllNamed('/homePage');
           })
           .onError((error, stackTrace) {
             setLoading(false);
-            Utils().toastMessage(message: error.toString());
+            Get.snackbar('Error', error.toString());
           });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        Utils().toastMessage(message: 'No user found for that email.');
+        Get.snackbar('Error', 'No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        Utils().toastMessage(message: 'Wrong password provided for that user.');
+        Get.snackbar('Error', 'Wrong password provided for that user.');
+
         setLoading(false);
       }
     } catch (e) {
-      Utils().toastMessage(message: e.toString());
+      Get.snackbar('Error', e.toString());
+
       setLoading(false);
     }
   }
